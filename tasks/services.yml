@@ -1,18 +1,18 @@
 ---
   - name: Generate ansible_user.rsc to check and add user
-    template: src=services.rsc.j2 dest={{role_path}}/files/tmp/services-{{inventory_hostname}}.rsc
+    template: src=services.rsc.j2 dest={{role_path}}/files/tmp/firewall-services-{{inventory_hostname}}.rsc
     delegate_to: localhost
 
-  - name: Run ansible_user.rsc script
-    command: scp -P {{ansible_port}} {{role_path}}/files/tmp/services-{{inventory_hostname}}.rsc {{ansible_user}}@{{inventory_hostname}}:/services-{{inventory_hostname}}.rsc
+  - name: Send firewall-services script
+    command: scp -P {{ansible_port}} {{role_path}}/files/tmp/services-{{inventory_hostname}}.rsc {{ansible_user}}@{{inventory_hostname}}:/firewall-services-{{inventory_hostname}}.rsc
     delegate_to: localhost
 
   - name: Delete temporary ansible_user file
-    file: path={{role_path}}/files/tmp/services-{{inventory_hostname}}.rsc state=absent
+    file: path={{role_path}}/files/tmp/firewall-services-{{inventory_hostname}}.rsc state=absent
     delegate_to: localhost
 
   - name: Run script on router
     raw:  "/import services-{{inventory_hostname}}.rsc"
 
-  - name: Remove script on router
+  - name: Remove script from router
     raw:  "/file remove services-{{inventory_hostname}}.rsc"

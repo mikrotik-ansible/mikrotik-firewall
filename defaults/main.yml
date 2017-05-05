@@ -1,12 +1,12 @@
 mikrotik_firewall:
+  remove_old_filter_rules: false
   filter_rules: []
-
-  nat: []
-
-  mangle: []
-
-  raw: []
-
+  remove_old_nat_rules: false
+  nat_rules: []
+  remove_old_mangle_rules: false
+  mangle_rules: []
+  remove_old_raw_rules: false
+  raw_rules: []
   service_port_rules:
       # Mikrotik defaults
       - name: ftp
@@ -30,14 +30,7 @@ mikrotik_firewall:
       - name: tftp
         ports: 69
         disabled: "no"
-
-
+  remove_old_address_list: false
   address_list: []
-
+  remove_old_layers7_protocols: false
   layers7_protocols: []
-
-
-
-
-
-
