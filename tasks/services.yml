@@ -1,0 +1,12 @@
+---
+  - name: Display all variables/facts known for a host
+    debug:
+      var: mikrotik_firewall.service_port_rules
+
+  - name: Generate ansible_user.rsc to check and add user
+    template: src=services.rsc.j2 dest={{role_path}}/files/tmp/services-{{inventory_hostname}}.rsc
+
+### TODO DEPLOY
+
+  - name: Delete temporary ansible_user file
+    file: path={{role_path}}/files/tmp/services-{{inventory_hostname}}.rsc state=absent

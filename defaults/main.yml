@@ -1,0 +1,43 @@
+mikrotik_firewall:
+  filter_rules: []
+
+  nat: []
+
+  mangle: []
+
+  raw: []
+
+  service_port_rules:
+      # Mikrotik defaults
+      - name: ftp
+        ports: 21
+        sip_direct_media: "no"
+        disabled: "no"
+      - name: h323
+        sip_direct_media: "no"
+        disabled: "no"
+      - name: irc
+        ports: 6667
+        sip_direct_media: "no"
+        disabled: "no"
+      - name: pptp
+        sip_direct_media: "no"
+        disabled: "no"
+      - name: sip
+        ports: 5060,5061
+        sip_direct_media: "yes"
+        disabled: "no"
+      - name: tftp
+        ports: 69
+        disabled: "no"
+
+
+  address_list: []
+
+  layers7_protocols: []
+
+
+
+
+
+

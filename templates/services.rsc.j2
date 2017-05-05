@@ -1,0 +1,4 @@
+{% for service in mikrotik_firewall.service_port_rules %}
+:if ([/ip firewall service-port find name={{service.name}} disabled={{service.disabled}} {% if service.sip_direct_media is defined %}sip-direct-media={{service.sip_direct_media}}{% endif %} {% if service.ports is defined %}ports={{service.ports}}{% endif %} ] ="") do={ /ip firewall service-port set {{service.name}} disabled={{service.disabled}} {% if service.sip_direct_media is defined %}sip-direct-media={{service.sip_direct_media}}{% endif %} {% if service.ports is defined %}ports={{service.ports}}{% endif %}}
+{% endfor %}
+
