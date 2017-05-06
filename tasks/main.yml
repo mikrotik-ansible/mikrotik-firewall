@@ -1,3 +1,7 @@
 ---
 # tasks file for mikrotik-firewall
 - include: services.yml
+  tags: [ 'role::mikrotik_firewall:services' ]
+
+- include: address_list.yml
+  tags: [ 'role::mikrotik_firewall:address_list' ]

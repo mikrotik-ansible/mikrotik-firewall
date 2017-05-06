@@ -1,0 +1,19 @@
+---
+  - name: Generate firewall-address_list-{{inventory_hostname}}.rsc to check and add user
+    template: src=address_list.rsc.j2 dest={{role_path}}/files/tmp/firewall-address_list-{{inventory_hostname}}.rsc
+    delegate_to: localhost
+
+  - name: Send firewall-address_list-{{inventory_hostname}}.rsc script
+    command: scp -P {{ansible_port}} {{role_path}}/files/tmp/firewall-address_list-{{inventory_hostname}}.rsc {{ansible_user}}@{{inventory_hostname}}:/firewall-address_list-{{inventory_hostname}}.rsc
+    delegate_to: localhost
+
+  - name: Delete temporary firewall-address_list-{{inventory_hostname}}.rsc file
+    file: path={{role_path}}/files/tmp/firewall-address_list-{{inventory_hostname}}.rsc state=absent
+    delegate_to: localhost
+
+  - name: Run firewall-address_list-{{inventory_hostname}}.rsc on router
+    raw:  "/import firewall-address_list-{{inventory_hostname}}.rsc"
+    tags: mikrotik_firewall_services
+
+  - name: Remove firewall-address_list-{{inventory_hostname}}.rsc from router
+    raw:  "/file remove firewall-address_list-{{inventory_hostname}}.rsc"

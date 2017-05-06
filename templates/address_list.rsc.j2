@@ -1,0 +1,21 @@
+{% if  mikrotik_firewall.remove_old_address_list == true %}
+/ip firewall address-list remove [/ip firewall address-list find]
+{% endif %}
+
+/ip firewall address-list remove [/ip firewall address-list find where \
+{% for list in mikrotik_firewall.address_list %}
+{% if iter is defined %} and {% endif %}!(list={{list.list}} disabled={{list.disabled}} address={{list.address}} comment="Ansible managed: [{{list.comment}}]") \
+{% set iter = true %}
+{% endfor %}
+]
+# Add all values
+{% for list in mikrotik_firewall.address_list %}
+:if ([/ip firewall address-list find list={{list.list}} disabled={{list.disabled}} address={{list.address}} comment="Ansible managed: [{{list.comment}}]"] = "") do={
+:log info "Add address: {{list.address}} to address-list: {{list.list}}..."
+/ip firewall address-list add list={{list.list}} {% if list.disabled is defined %}disabled={{list.disabled}} {%endif%}address={{list.address}}\
+{% if list.comment is defined %}
+ comment="Ansible managed: [{{list.comment}}]"
+{% endif %}
+}
+{% endfor %}
+
