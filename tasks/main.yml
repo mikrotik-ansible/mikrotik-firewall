@@ -5,3 +5,15 @@
 
 - include: address_list.yml
   tags: [ 'role::mikrotik_firewall:address_list' ]
+
+- include: raw.yml
+  tags: [ 'role::mikrotik_firewall:raw' ]
+
+- include: mangle.yml
+  tags: [ 'role::mikrotik_firewall:mangle' ]
+
+- include: nat.yml
+  tags: [ 'role::mikrotik_firewall:nat' ]
+
+- include: filter.yml
+  tags: [ 'role::mikrotik_firewall:filter' ]
