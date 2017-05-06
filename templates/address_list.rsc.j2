@@ -2,12 +2,12 @@
 /ip firewall address-list remove [/ip firewall address-list find]
 {% endif %}
 
-/ip firewall address-list remove [/ip firewall address-list find where \
+/ip firewall address-list remove [/ip firewall address-list find where !(\
 {% for list in mikrotik_firewall.address_list %}
-{% if iter is defined %} and {% endif %}!(list={{list.list}} disabled={{list.disabled}} address={{list.address}} comment="Ansible managed: [{{list.comment}}]") \
+{% if iter is defined %} or {% endif %}(list={{list.list}} and disabled={{list.disabled}} and address={{list.address}} and comment="Ansible managed: [{{list.comment}}]") \
 {% set iter = true %}
 {% endfor %}
-]
+)]
 # Add all values
 {% for list in mikrotik_firewall.address_list %}
 :if ([/ip firewall address-list find list={{list.list}} disabled={{list.disabled}} address={{list.address}} comment="Ansible managed: [{{list.comment}}]"] = "") do={
@@ -18,4 +18,3 @@
 {% endif %}
 }
 {% endfor %}
-
