@@ -30,7 +30,7 @@
 {% if raw.in_interface is defined %}and in-interface="{{raw.in_interface}}" {%endif%}
 {% if raw.out_interface_list is defined %}and out-interface-list="{{raw.out_interface_list}}" {%endif%}
 {% if raw.src_mac_address is defined %}and src-mac-address="{{raw.src_mac_address}}" {%endif%}
-{% if raw.disabled is defined %}and disabled="{{raw.disabled}}" {%endif%}
+{% if raw.disabled is defined %}and disabled={{raw.disabled}} {%endif%}
 {% if raw.in_interface_list is defined %}and in-interface-list="{{raw.in_interface_list}}" {%endif%}
 {% if raw.packet_mark is defined %}and packet-mark="{{raw.packet_mark}}" {%endif%}
 {% if raw.src_port is defined %}and src-port="{{raw.src_port}}" {%endif%}
@@ -85,7 +85,7 @@
 {% if raw.in_interface is defined %}in-interface="{{raw.in_interface}}" {%endif%}
 {% if raw.out_interface_list is defined %}out-interface-list="{{raw.out_interface_list}}" {%endif%}
 {% if raw.src_mac_address is defined %}src-mac-address="{{raw.src_mac_address}}" {%endif%}
-{% if raw.disabled is defined %}disabled="{{raw.disabled}}" {%endif%}
+{% if raw.disabled is defined %}disabled={{raw.disabled}} {%endif%}
 {% if raw.in_interface_list is defined %}in-interface-list="{{raw.in_interface_list}}" {%endif%}
 {% if raw.packet_mark is defined %}packet-mark="{{raw.packet_mark}}" {%endif%}
 {% if raw.src_port is defined %}src-port="{{raw.src_port}}" {%endif%}
@@ -113,7 +113,7 @@
 {% if raw.protocol is defined %}protocol="{{raw.protocol}}" {%endif%}] = "") do={
 /ip firewall raw add chain={{raw.chain}} {% if raw.action is defined %}action={{raw.action}} {%endif%}
 {% if raw.fragment is defined %}fragment={{raw.fragment}} {%endif%}
-{% if raw.log_prefix is defined %}log-prefix={{raw.log_prefix}} {%endif%}
+{% if raw.log_prefix is defined %}log-prefix="{{raw.log_prefix}}" {%endif%}
 {% if raw.psd is defined %}psd={{raw.psd}} {%endif%}
 {% if raw.address_list is defined %}address-list={{raw.address_list}} {%endif%}
 {% if raw.hotspot is defined %}hotspot={{raw.hotspot}} {%endif%}
