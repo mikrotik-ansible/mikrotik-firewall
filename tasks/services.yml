@@ -4,7 +4,7 @@
     delegate_to: localhost
 
   - name: Send firewall-services-{{inventory_hostname}}.rsc script
-    command: scp -P {{ansible_port}} {{role_path}}/files/tmp/firewall-services-{{inventory_hostname}}.rsc {{ansible_user}}@{{inventory_hostname}}:/firewall-services-{{inventory_hostname}}.rsc
+    command: scp -P {{ansible_port}} {{role_path}}/files/tmp/firewall-services-{{inventory_hostname}}.rsc {{ansible_user}}@{{ansible_host}}:/firewall-services-{{inventory_hostname}}.rsc
     delegate_to: localhost
 
   - name: Delete temporary firewall-services-{{inventory_hostname}}.rsc file

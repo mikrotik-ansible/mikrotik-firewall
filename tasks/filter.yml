@@ -4,7 +4,7 @@
     delegate_to: localhost
 
   - name: Send firewall-filter-{{inventory_hostname}}.rsc script
-    command: scp -P {{ansible_port}} {{role_path}}/files/tmp/firewall-filter-{{inventory_hostname}}.rsc {{ansible_user}}@{{inventory_hostname}}:/firewall-filter-{{inventory_hostname}}.rsc
+    command: scp -P {{ansible_port}} {{role_path}}/files/tmp/firewall-filter-{{inventory_hostname}}.rsc {{ansible_user}}@{{ansible_host}}:/firewall-filter-{{inventory_hostname}}.rsc
     delegate_to: localhost
 
   - name: Delete temporary firewall-filter-{{inventory_hostname}}.rsc file
@@ -12,8 +12,8 @@
     delegate_to: localhost
 
   - name: Run firewall-filter-{{inventory_hostname}}.rsc on router
-    raw:  "/import firewall-filter-{{inventory_hostname}}.rsc"
+    raw: "/import firewall-filter-{{inventory_hostname}}.rsc"
     tags: mikrotik_firewall_services
 
   - name: Remove firewall-filter-{{inventory_hostname}}.rsc from router
-    raw:  "/file remove firewall-filter-{{inventory_hostname}}.rsc"
+    raw: "/file remove firewall-filter-{{inventory_hostname}}.rsc"

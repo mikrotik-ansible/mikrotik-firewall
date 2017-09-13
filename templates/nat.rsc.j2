@@ -1,7 +1,7 @@
 {% if  mikrotik_firewall.remove_old_nat_rules == true %}
-/ip firewall nat remove [/ip firewall nat find]
+/ip firewall nat remove [/ip firewall nat find where dynamic=no]
 {% endif %}
-
+# Remove not defined
 /ip firewall nat remove [/ip firewall nat find where !(\
 {% for nat in mikrotik_firewall.nat_rules %}{% if iter is defined %} or {% endif %}(chain="{{nat.chain}}" \
 {% if nat.action is defined %}and action="{{nat.action}}" {%endif%}
@@ -66,7 +66,7 @@
 {% if nat.routing_table is defined %}and routing-table="{{nat.routing_table}}" {%endif%}) \
 {% set iter = true %}
 {%endfor%}
-)]
+) and dynamic=no]
 # ADD
 {% for nat in mikrotik_firewall.nat_rules %}
 :if ([/ip firewall nat find chain="{{nat.chain}}" {% if nat.action is defined %}action="{{nat.action}}" {%endif%}

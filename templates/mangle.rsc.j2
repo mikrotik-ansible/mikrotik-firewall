@@ -1,10 +1,10 @@
 {% if  mikrotik_firewall.remove_old_mangle_rules == true %}
-/ip firewall mangle remove [/ip firewall mangle find]
+/ip firewall mangle remove [/ip firewall mangle find where dynamic=no]
 {% endif %}
-
+# Remove not defined
 /ip firewall mangle remove [/ip firewall mangle find where !(\
 {% for mangle in mikrotik_firewall.mangle_rules %}
-{% if iter is defined %} or {% endif %}chain={{mangle.chain}} \
+{% if iter is defined %} or {% endif %}(chain={{mangle.chain}} \
 {% if mangle.action is defined %}and action={{mangle.action}} {%endif%}
 {% if mangle.in_bridge_port is defined %}and in-bridge-port={{mangle.in_bridge_port}} {%endif%}
 {% if mangle.new_routing_mark is defined %}and new-routing-mark={{mangle.new_routing_mark}} {%endif%}
@@ -78,10 +78,10 @@
 {% if mangle.icmp_options is defined %}and icmp-options={{mangle.icmp_options}} {%endif%}
 {% if mangle.new_priority is defined %}and new-priority={{mangle.new_priority}} {%endif%}
 {% if mangle.psd is defined %}and psd={{mangle.psd}} {%endif%}
-{% set iter = true %}
+{% set iter = true %}) \
 {%endfor%}
-)]
-
+) and dynamic=no]
+# Add
 {% for mangle in mikrotik_firewall.mangle_rules %}
 :if ([/ip firewall mangle find chain={{mangle.chain}} \
 {% if mangle.action is defined %}action={{mangle.action}} {%endif%}
@@ -157,7 +157,7 @@
 {% if mangle.icmp_options is defined %}icmp-options={{mangle.icmp_options}} {%endif%}
 {% if mangle.new_priority is defined %}new-priority={{mangle.new_priority}} {%endif%}
 {% if mangle.psd is defined %}psd={{mangle.psd}} {%endif%}] = "") do={
-/ip firewall mangle add chain={{mangle.chain}}\
+/ip firewall mangle add chain={{mangle.chain}} \
 {% if mangle.action is defined %}action={{mangle.action}} {%endif%}
 {% if mangle.in_bridge_port is defined %}in-bridge-port={{mangle.in_bridge_port}} {%endif%}
 {% if mangle.new_routing_mark is defined %}new-routing-mark={{mangle.new_routing_mark}} {%endif%}

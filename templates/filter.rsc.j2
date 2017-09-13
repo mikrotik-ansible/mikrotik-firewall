@@ -1,7 +1,7 @@
 {% if  mikrotik_firewall.remove_old_filter_rules == true %}
-/ip firewall filter remove [/ip firewall filter find]
+/ip firewall filter remove [/ip firewall filter find where dynamic=no]
 {% endif %}
-
+# Remove not defined
 /ip firewall filter remove [/ip firewall filter find where !(\
 {% for filter in mikrotik_firewall.filter_rules %}
 {% if iter is defined %} or {% endif %}(chain="{{filter.chain}}" \
@@ -66,10 +66,10 @@
 {% if filter.random is defined %}and random="{{filter.random}}" {%endif%}
 {% if filter.fragment is defined %}and fragment="{{filter.fragment}}" {%endif%}
 {% if filter.nth is defined %}and nth="{{filter.nth}}" {%endif%}
-{% if filter.reject_with is defined %}and reject-with="{{filter.reject_with}}" {%endif%}
-{% set iter = true %}) \
+{% if filter.reject_with is defined %}and reject-with="{{filter.reject_with}}" {%endif%}) \
+{% set iter = true %}
 {%endfor%}
-)]
+) and dynamic=no]
 
 {% for filter in mikrotik_firewall.filter_rules %}
 :if ([/ip firewall filter find chain={{filter.chain}} \
