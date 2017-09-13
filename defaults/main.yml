@@ -1,4 +1,21 @@
 mikrotik_firewall:
+  connection_tracking:
+    enabled: "yes"
+    tcp_syn_sent_timeout: 5s
+    tcp_syn_received_timeout: 5s
+    tcp_established_timeout: 1d
+    tcp_fin_wait_timeout: 10s
+    tcp_close_wait_timeout: 10s
+    tcp_last_ack_timeout: 10s
+    tcp_time_wait_timeout: 10s
+    tcp_close_timeout: 10s
+    tcp_max_retrans_timeout: 5m
+    tcp_unacked_timeout: 5m
+    udp_timeout: 10s
+    udp_stream_timeout: 3m
+    icmp_timeout: 10s
+    generic_timeout: 10m
+    
   remove_old_filter_rules: false
   filter_rules: []
   remove_old_nat_rules: false
@@ -8,28 +25,28 @@ mikrotik_firewall:
   remove_old_raw_rules: false
   raw_rules: []
   service_port_rules:
-      # Mikrotik defaults
-      - name: ftp
-        ports: 21
-        sip_direct_media: "no"
-        disabled: "no"
-      - name: h323
-        sip_direct_media: "no"
-        disabled: "no"
-      - name: irc
-        ports: 6667
-        sip_direct_media: "no"
-        disabled: "no"
-      - name: pptp
-        sip_direct_media: "no"
-        disabled: "no"
-      - name: sip
-        ports: 5060,5061
-        sip_direct_media: "yes"
-        disabled: "no"
-      - name: tftp
-        ports: 69
-        disabled: "no"
+    # Mikrotik defaults
+    - name: ftp
+      ports: 21
+      sip_direct_media: "no"
+      disabled: "no"
+    - name: h323
+      sip_direct_media: "no"
+      disabled: "no"
+    - name: irc
+      ports: 6667
+      sip_direct_media: "no"
+      disabled: "no"
+    - name: pptp
+      sip_direct_media: "no"
+      disabled: "no"
+    - name: sip
+      ports: 5060,5061
+      sip_direct_media: "yes"
+      disabled: "no"
+    - name: tftp
+      ports: 69
+      disabled: "no"
   remove_old_address_list: false
   address_list: []
   remove_old_layers7_protocols: false

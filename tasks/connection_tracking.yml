@@ -1,0 +1,105 @@
+---
+- name: "Setting enabled={{ mikrotik_firewall.connection_tracking.enabled }}"
+  raw: :if ([/ip firewall connection tracking get enabled] != "{{ mikrotik_firewall.connection_tracking.enabled }}") do={:put "enabled"; /ip firewall connection tracking set enabled={{ mikrotik_firewall.connection_tracking.enabled }} }
+  when: mikrotik_firewall.connection_tracking.enabled is defined
+  register: enabled
+  changed_when: enabled.stdout_lines[0] is defined and enabled.stdout_lines[0] == "enabled"
+  failed_when: enabled.stdout_lines[0] is defined and enabled.stdout_lines[0] != "enabled"
+
+- name: "Setting tcp-syn-sent-timeout={{ mikrotik_firewall.connection_tracking.tcp_syn_sent_timeout }}"
+  raw: :if ([/ip firewall connection tracking get tcp-syn-sent-timeout] != {{ mikrotik_firewall.connection_tracking.tcp_syn_sent_timeout }}) do={:put "tcp-syn-sent-timeout"; /ip firewall connection tracking set tcp-syn-sent-timeout={{ mikrotik_firewall.connection_tracking.tcp_syn_sent_timeout }} }
+  when: mikrotik_firewall.connection_tracking.tcp_syn_sent_timeout is defined
+  register: tcp_syn_sent_timeout
+  changed_when: tcp_syn_sent_timeout.stdout_lines[0] is defined and tcp_syn_sent_timeout.stdout_lines[0] == "tcp-syn-sent-timeout"
+  failed_when: tcp_syn_sent_timeout.stdout_lines[0] is defined and tcp_syn_sent_timeout.stdout_lines[0] != "tcp-syn-sent-timeout"
+
+- name: "Setting tcp-syn-received-timeout={{ mikrotik_firewall.connection_tracking.tcp_syn_received_timeout }}"
+  raw: :if ([/ip firewall connection tracking get tcp-syn-received-timeout] != {{ mikrotik_firewall.connection_tracking.tcp_syn_received_timeout }}) do={:put "tcp-syn-received-timeout"; /ip firewall connection tracking set tcp-syn-received-timeout={{ mikrotik_firewall.connection_tracking.tcp_syn_received_timeout }} }
+  when: mikrotik_firewall.connection_tracking.tcp_syn_received_timeout is defined
+  register: tcp_syn_received_timeout
+  changed_when: tcp_syn_received_timeout.stdout_lines[0] is defined and tcp_syn_received_timeout.stdout_lines[0] == "tcp-syn-received-timeout"
+  failed_when: tcp_syn_received_timeout.stdout_lines[0] is defined and tcp_syn_received_timeout.stdout_lines[0] != "tcp-syn-received-timeout"
+
+- name: "Setting tcp-established-timeout={{ mikrotik_firewall.connection_tracking.tcp_established_timeout }}"
+  raw: :if ([/ip firewall connection tracking get tcp-established-timeout] != {{ mikrotik_firewall.connection_tracking.tcp_established_timeout }}) do={:put "tcp-established-timeout"; /ip firewall connection tracking set tcp-established-timeout={{ mikrotik_firewall.connection_tracking.tcp_established_timeout }} }
+  when: mikrotik_firewall.connection_tracking.tcp_established_timeout is defined
+  register: tcp_established_timeout
+  changed_when: tcp_established_timeout.stdout_lines[0] is defined and tcp_established_timeout.stdout_lines[0] == "tcp-established-timeout"
+  failed_when: tcp_established_timeout.stdout_lines[0] is defined and tcp_established_timeout.stdout_lines[0] != "tcp-established-timeout"
+
+- name: "Setting tcp-fin-wait-timeout={{ mikrotik_firewall.connection_tracking.tcp_fin_wait_timeout }}"
+  raw: :if ([/ip firewall connection tracking get tcp-fin-wait-timeout] != {{ mikrotik_firewall.connection_tracking.tcp_fin_wait_timeout }}) do={:put "tcp-fin-wait-timeout"; /ip firewall connection tracking set tcp-fin-wait-timeout={{ mikrotik_firewall.connection_tracking.tcp_fin_wait_timeout }} }
+  when: mikrotik_firewall.connection_tracking.tcp_fin_wait_timeout is defined
+  register: tcp_fin_wait_timeout
+  changed_when: tcp_fin_wait_timeout.stdout_lines[0] is defined and tcp_fin_wait_timeout.stdout_lines[0] == "tcp-fin-wait-timeout"
+  failed_when: tcp_fin_wait_timeout.stdout_lines[0] is defined and tcp_fin_wait_timeout.stdout_lines[0] != "tcp-fin-wait-timeout"
+
+- name: "Setting tcp-close-wait-timeout={{ mikrotik_firewall.connection_tracking.tcp_close_wait_timeout }}"
+  raw: :if ([/ip firewall connection tracking get tcp-close-wait-timeout] != {{ mikrotik_firewall.connection_tracking.tcp_close_wait_timeout }}) do={:put "tcp-close-wait-timeout"; /ip firewall connection tracking set tcp-close-wait-timeout={{ mikrotik_firewall.connection_tracking.tcp_close_wait_timeout }} }
+  when: mikrotik_firewall.connection_tracking.tcp_close_wait_timeout is defined
+  register: tcp_close_wait_timeout
+  changed_when: tcp_close_wait_timeout.stdout_lines[0] is defined and tcp_close_wait_timeout.stdout_lines[0] == "tcp-close-wait-timeout"
+  failed_when: tcp_close_wait_timeout.stdout_lines[0] is defined and tcp_close_wait_timeout.stdout_lines[0] != "tcp-close-wait-timeout"
+
+- name: "Setting tcp-last-ack-timeout={{ mikrotik_firewall.connection_tracking.tcp_last_ack_timeout }}"
+  raw: :if ([/ip firewall connection tracking get tcp-last-ack-timeout] != {{ mikrotik_firewall.connection_tracking.tcp_last_ack_timeout }}) do={:put "tcp-last-ack-timeout"; /ip firewall connection tracking set tcp-last-ack-timeout={{ mikrotik_firewall.connection_tracking.tcp_last_ack_timeout }} }
+  when: mikrotik_firewall.connection_tracking.tcp_last_ack_timeout is defined
+  register: tcp_last_ack_timeout
+  changed_when: tcp_last_ack_timeout.stdout_lines[0] is defined and tcp_last_ack_timeout.stdout_lines[0] == "tcp-last-ack-timeout"
+  failed_when: tcp_last_ack_timeout.stdout_lines[0] is defined and tcp_last_ack_timeout.stdout_lines[0] != "tcp-last-ack-timeout"
+
+- name: "Setting tcp-time-wait-timeout={{ mikrotik_firewall.connection_tracking.tcp_time_wait_timeout }}"
+  raw: :if ([/ip firewall connection tracking get tcp-time-wait-timeout] != {{ mikrotik_firewall.connection_tracking.tcp_time_wait_timeout }}) do={:put "tcp-time-wait-timeout"; /ip firewall connection tracking set tcp-time-wait-timeout={{ mikrotik_firewall.connection_tracking.tcp_time_wait_timeout }} }
+  when: mikrotik_firewall.connection_tracking.tcp_time_wait_timeout is defined
+  register: tcp_time_wait_timeout
+  changed_when: tcp_time_wait_timeout.stdout_lines[0] is defined and tcp_time_wait_timeout.stdout_lines[0] == "tcp-time-wait-timeout"
+  failed_when: tcp_time_wait_timeout.stdout_lines[0] is defined and tcp_time_wait_timeout.stdout_lines[0] != "tcp-time-wait-timeout"
+
+- name: "Setting tcp-close-timeout={{ mikrotik_firewall.connection_tracking.tcp_close_timeout }}"
+  raw: :if ([/ip firewall connection tracking get tcp-close-timeout] != {{ mikrotik_firewall.connection_tracking.tcp_close_timeout }}) do={:put "tcp-close-timeout"; /ip firewall connection tracking set tcp-close-timeout={{ mikrotik_firewall.connection_tracking.tcp_close_timeout }} }
+  when: mikrotik_firewall.connection_tracking.tcp_close_timeout is defined
+  register: tcp_close_timeout
+  changed_when: tcp_close_timeout.stdout_lines[0] is defined and tcp_close_timeout.stdout_lines[0] == "tcp-close-timeout"
+  failed_when: tcp_close_timeout.stdout_lines[0] is defined and tcp_close_timeout.stdout_lines[0] != "tcp-close-timeout"
+
+- name: "Setting tcp-max-retrans-timeout={{ mikrotik_firewall.connection_tracking.tcp_max_retrans_timeout }}"
+  raw: :if ([/ip firewall connection tracking get tcp-max-retrans-timeout] != {{ mikrotik_firewall.connection_tracking.tcp_max_retrans_timeout }}) do={:put "tcp-max-retrans-timeout"; /ip firewall connection tracking set tcp-max-retrans-timeout={{ mikrotik_firewall.connection_tracking.tcp_max_retrans_timeout }} }
+  when: mikrotik_firewall.connection_tracking.tcp_max_retrans_timeout is defined
+  register: tcp_max_retrans_timeout
+  changed_when: tcp_max_retrans_timeout.stdout_lines[0] is defined and tcp_max_retrans_timeout.stdout_lines[0] == "tcp-max-retrans-timeout"
+  failed_when: tcp_max_retrans_timeout.stdout_lines[0] is defined and tcp_max_retrans_timeout.stdout_lines[0] != "tcp-max-retrans-timeout"
+
+- name: "Setting tcp-unacked-timeout={{ mikrotik_firewall.connection_tracking.tcp_unacked_timeout }}"
+  raw: :if ([/ip firewall connection tracking get tcp-unacked-timeout] != {{ mikrotik_firewall.connection_tracking.tcp_unacked_timeout }}) do={:put "tcp-unacked-timeout"; /ip firewall connection tracking set tcp-unacked-timeout={{ mikrotik_firewall.connection_tracking.tcp_unacked_timeout }} }
+  when: mikrotik_firewall.connection_tracking.tcp_unacked_timeout is defined
+  register: tcp_unacked_timeout
+  changed_when: tcp_unacked_timeout.stdout_lines[0] is defined and tcp_unacked_timeout.stdout_lines[0] == "tcp-unacked-timeout"
+  failed_when: tcp_unacked_timeout.stdout_lines[0] is defined and tcp_unacked_timeout.stdout_lines[0] != "tcp-unacked-timeout"
+
+- name: "Setting udp-timeout={{ mikrotik_firewall.connection_tracking.udp_timeout }}"
+  raw: :if ([/ip firewall connection tracking get udp-timeout] != {{ mikrotik_firewall.connection_tracking.udp_timeout }}) do={:put "udp-timeout"; /ip firewall connection tracking set udp-timeout={{ mikrotik_firewall.connection_tracking.udp_timeout }} }
+  when: mikrotik_firewall.connection_tracking.udp_timeout is defined
+  register: udp_timeout
+  changed_when: udp_timeout.stdout_lines[0] is defined and udp_timeout.stdout_lines[0] == "udp-timeout"
+  failed_when: udp_timeout.stdout_lines[0] is defined and udp_timeout.stdout_lines[0] != "udp-timeout"
+
+- name: "Setting udp-stream-timeout={{ mikrotik_firewall.connection_tracking.udp_stream_timeout }}"
+  raw: :if ([/ip firewall connection tracking get udp-stream-timeout] != {{ mikrotik_firewall.connection_tracking.udp_stream_timeout }}) do={:put "udp-stream-timeout"; /ip firewall connection tracking set udp-stream-timeout={{ mikrotik_firewall.connection_tracking.udp_stream_timeout }} }
+  when: mikrotik_firewall.connection_tracking.udp_stream_timeout is defined
+  register: udp_stream_timeout
+  changed_when: udp_stream_timeout.stdout_lines[0] is defined and udp_stream_timeout.stdout_lines[0] == "udp-stream-timeout"
+  failed_when: udp_stream_timeout.stdout_lines[0] is defined and udp_stream_timeout.stdout_lines[0] != "udp-stream-timeout"
+
+- name: "Setting icmp-timeout={{ mikrotik_firewall.connection_tracking.icmp_timeout }}"
+  raw: :if ([/ip firewall connection tracking get icmp-timeout] != {{ mikrotik_firewall.connection_tracking.icmp_timeout }}) do={:put "icmp-timeout"; /ip firewall connection tracking set icmp-timeout={{ mikrotik_firewall.connection_tracking.icmp_timeout }} }
+  when: mikrotik_firewall.connection_tracking.icmp_timeout is defined
+  register: icmp_timeout
+  changed_when: icmp_timeout.stdout_lines[0] is defined and icmp_timeout.stdout_lines[0] == "icmp-timeout"
+  failed_when: icmp_timeout.stdout_lines[0] is defined and icmp_timeout.stdout_lines[0] != "icmp-timeout"
+
+- name: "Setting generic-timeout={{ mikrotik_firewall.connection_tracking.generic_timeout }}"
+  raw: :if ([/ip firewall connection tracking get generic-timeout] != {{ mikrotik_firewall.connection_tracking.generic_timeout }}) do={:put "generic-timeout"; /ip firewall connection tracking set generic-timeout={{ mikrotik_firewall.connection_tracking.generic_timeout }} }
+  when: mikrotik_firewall.connection_tracking.generic_timeout is defined
+  register: generic_timeout
+  changed_when: generic_timeout.stdout_lines[0] is defined and generic_timeout.stdout_lines[0] == "generic-timeout"
+  failed_when: generic_timeout.stdout_lines[0] is defined and generic_timeout.stdout_lines[0] != "generic-timeout"

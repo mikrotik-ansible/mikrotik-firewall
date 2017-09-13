@@ -1,6 +1,6 @@
 galaxy_info:
   author: Martin Dulin
-  description: Network firewall automation
+  description: Mikrotik firewall automation
   company: Dulin
   license: MIT
 
